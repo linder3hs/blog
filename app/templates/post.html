@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+  <h2>Blog: </h2>
+  <a href="{{ url_for('index') }}">Home</a>
+
+  <h3>Hola, {{ current_user.username }}</h3>
+
+  <div>
+    <form action="" method="post" novalidate>
+      {{ post_form.hidden_tag() }}
+      {{ post_form.body.label }}
+      {{ post_form.body }}
+
+      {{ post_form.submit() }}
+    </form>
+  </div>
+
+</div>
+
+{% endblock content %}

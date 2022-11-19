@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block content %}
+<div>
+  <div class="container__post">
+    <div class="post__image">
+      <img
+        src="https://secure.gravatar.com/avatar/{{ current_user.username }}?d=identicon"
+        alt=""
+      />
+    </div>
+    <div class="post__body">
+      <p class="username">{{ post.author.username }}</p>
+      <p class="body">{{ post.body }}</p>
+    </div>
+  </div>
+  <div style="margin-top: 30px">
+    <form action="" method="POST">
+      {{ comment_form.hidden_tag() }} {{ comment_form.comment.label }} {{
+      comment_form.comment }} {{ comment_form.submit() }}
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

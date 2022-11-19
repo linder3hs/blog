@@ -1,20 +1,36 @@
 {% extends "base.html" %} {% block content %}
-  <div>
-    Microblog:
-    <a href="{{ url_for('index') }}">Home</a>
-    {% if current_user.is_anonymous %}
-    <a href="{{ url_for('login') }}">Login</a>
-    {% else %}
-    <a href="{{ url_for('logout') }}">Logout</a>
-    {% endif %}
-  </div>
-  <h1>Bienvenido!</h1>
+<div>
+  Microblog:
+  <a href="{{ url_for('index') }}">Home</a>
+  {% if current_user.is_anonymous %}
+  <a href="{{ url_for('login') }}">Login</a>
+  {% else %}
+  <a href="{{ url_for('logout') }}">Logout</a>
+  {% endif %}
+</div>
+<h1>Bienvenido! {{ posts_by_current_user }}</h1>
+<h3>
+  Hola, <a href="{{ url_for('profile') }}">{{ current_user.username }}!</a> -
+  <a href="{{ url_for('post') }}">crea un nuevo post</a>
+</h3>
 
-    <h3>Hola, {{ current_user.username }}!</h3>
-    <p>Gracias por iniciar sesión</p>
-    {% for post in posts %}
-    <div><p>{{ post.author.username }} Postea: <b>{{ post.body }}</b></p></div>
-    {% endfor %}
-    
+<div class="container">
+  {% for post in posts %}
+  <a href="{{ url_for('post_detail', id=post.id) }}">
+    <div class="container__post">
+      <div class="post__image">
+        <img
+          src="https://secure.gravatar.com/avatar/{{ current_user.username }}?d=identicon"
+          alt=""
+        />
+      </div>
+      <div class="post__body">
+        <p class="username">{{ post.author.username }}</p>
+        <p class="body">{{ post.body }}</p>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
+</div>
+
 {% endblock %}
-
